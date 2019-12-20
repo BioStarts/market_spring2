@@ -101,10 +101,19 @@ public class MarketController {
     }
 
     @GetMapping("/orders/create")
+    public String createOrder(Principal principal, Model model) {
+        User user = userService.findByPhone(principal.getName());
+        Order order = new Order(user, cart);
+        orderService.save(order);
+        model.addAttribute(order);
+        return "oder_info";
+    }
+
+    /*@GetMapping("/orders/create")
     public String createOrder(Principal principal) {
         User user = userService.findByPhone(principal.getName());
         Order order = new Order(user, cart);
         orderService.save(order);
         return "redirect:/";
-    }
+    }*/
 }
