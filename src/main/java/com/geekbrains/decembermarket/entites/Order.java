@@ -1,6 +1,7 @@
 package com.geekbrains.decembermarket.entites;
 
 import com.geekbrains.decembermarket.utils.Cart;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Getter
     private Long id;
 
     @ManyToOne

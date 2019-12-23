@@ -100,11 +100,28 @@ public class MarketController {
         return "cart_page";
     }
 
-    @GetMapping("/orders/create")
-    public String createOrder(Principal principal) {
+    @GetMapping("/orders/edit")
+    public String createOrder(Principal principal, Model model) {
         User user = userService.findByPhone(principal.getName());
+        //Order order = new Order(user, cart);
+        //orderService.save(order);
+        model.addAttribute("cart",cart);
+        model.addAttribute("user",user);
+        return "order_info";
+    }
+
+    @PostMapping("/orders/create")
+    public String createOrder(Principal principal ,
+                              Model model,
+                              @ModelAttribute(name = "address") String deliveryAddress,
+                              @ModelAttribute(name = "phone") String phone) {
+        User user = userService.findByPhone(principal.getName());
+        model.addAttribute("finalPrice", cart.getPrice());
         Order order = new Order(user, cart);
         orderService.save(order);
-        return "redirect:/";
+        model.addAttribute("address", deliveryAddress);
+        model.addAttribute("phone", phone);
+        model.addAttribute("order", order);
+        return "success";
     }
 }
