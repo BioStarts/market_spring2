@@ -36,7 +36,7 @@
         </table>
         <span th:text="'Общая стоимость: ' + ${cart.price}" />
         <br>
-        <a class="btn btn-primary" th:href="@{/orders/create}" >Оформить заказ</a>
+        <a class="btn btn-primary" th:href="@{/orders/edit}" >Перейти к оформлению</a>
     </div>
     <div th:if="${cart.items.size() == 0}">
         <span text="Ваша корзина пуста" />

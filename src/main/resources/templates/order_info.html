@@ -17,24 +17,43 @@
     <h1>Заказ</h1>
 
     <!--<div th:if="${order.OrderItem.size() > 0}">*/-->
-        <table class="table table-hover">
-            <thead class="thead-dark">
+    <form th:action="@{/orders/create}" method="POST">
+    <table class="table table-hover">
+        <thead class="thead-dark">
             <tr>
-                <th>Номер заказа</th>
+                <th>Название товара</th>
+                <th>Количество</th>
                 <th>Цена</th>
             </tr>
-            </thead>
+        </thead>
             <tbody>
-            <tr th:each="item : ${order.items}">
-                <td th:text="${item.product.id}"/>
-                <td th:text="${item.price}"/>
-            </tr>
+                <tr th:each="item : ${cart.items}">
+                    <td th:text="${item.product.title}"/>
+                    <td th:text="${item.quantity}"/>
+                    <td th:text="${item.price}"/>
+                </tr>
             </tbody>
-        </table>
-        <span th:text="'Общая стоимость: ' + ${order.price}" />
+    </table>
+    <span th:text="'Общая стоимость: ' + ${cart.price}" />
+        <br>
+        <div class="form-row">
+            <div class="col form-group">
+                <label>Адрес доставки</label>
+                <input name="address" type="text" class="form-control" placeholder="Тверь, ул. Ленина д.1 кв.2">
+            </div>
+            <div class="col form-group">
+                <label>Контактный телефон</label>
+                <input name="phone"  th:value="${user.phone}" type="number" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Оформить заказ</button>
+        </div>
+    </form>
+    <!--
         <br>
         <a class="btn btn-primary" th:href="@{/orders/create}" >Оформить заказ</a>
-    <!--</div>*/-->
+    </div>*/-->
     <!--<div th:if="${cart.items.size() == 0}">
         <span text="Ваша корзина пуста" />
     </div> */-->
